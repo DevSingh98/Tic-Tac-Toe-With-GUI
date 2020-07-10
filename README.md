@@ -2,7 +2,7 @@
 This is a Java program that creates a tic tac toe game with a gui using javafx.
 
 ### Inital Version: 
-  The first Version that is fully function.
+  The first Version that is fully functional.
 
 ### Updated Version coming soon: 
   Condensing the button creation and actions into a single set repeated by a for loop and stored in an arraylist.
