@@ -61,7 +61,11 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
+<<<<<<< HEAD
                                 deveshwar.singh.tictactoewithgui/deveshwar.singh.tictactoewithgui.HelloApplication
+=======
+                                deveshwar.singh.tictictactoegame/deveshwar.singh.tictictactoegame.HelloApplication
+>>>>>>> master
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
