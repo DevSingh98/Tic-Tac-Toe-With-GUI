@@ -1,8 +1,6 @@
-module deveshwar.singh.tictictactoegame {
+module deveshwar.singh.tictactoewithgui {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens deveshwar.singh.tictictactoegame to javafx.fxml;
-    exports deveshwar.singh.tictictactoegame;
+    opens deveshwar.singh.tictactoewithgui to javafx.fxml;
+    exports deveshwar.singh.tictactoewithgui;
 }

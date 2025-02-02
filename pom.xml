@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Deveshwar.Singh</groupId>
-    <artifactId>TicTicTacToeGame</artifactId>
+    <artifactId>Tic-Tac-Toe-With-GUI</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>TicTicTacToeGame</name>
+    <name>Tic-Tac-Toe-With-GUI</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                deveshwar.singh.tictictactoegame/deveshwar.singh.tictictactoegame.HelloApplication
+                                deveshwar.singh.tictactoewithgui/deveshwar.singh.tictactoewithgui.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
