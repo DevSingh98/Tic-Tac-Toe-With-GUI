@@ -34,3 +34,5 @@ This is a Java program that implements a Tic-Tac-Toe game with a graphical user 
    java Main
 
    ```
+
+   Updated to run with java 21
