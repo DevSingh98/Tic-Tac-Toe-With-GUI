@@ -20,6 +20,8 @@ This is a Java program that implements a Tic-Tac-Toe game with a graphical user 
   - Refactoring the button creation and actions into a single set, utilizing a `for` loop and storing them in an `ArrayList` for efficiency.
 - **Smart AI**: 
   - Introducing a "smart" computer opponent powered by the Minimax algorithm to simulate strategic moves.
+- **Revamped UI**:
+  - Update the UI to reflect more modern characteristics
 
 ---
 
