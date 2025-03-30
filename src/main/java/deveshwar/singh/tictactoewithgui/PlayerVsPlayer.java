@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
 public class PlayerVsPlayer extends StartScreen {
@@ -24,24 +20,27 @@ public class PlayerVsPlayer extends StartScreen {
     private static BorderPane boarderPane = new BorderPane();
     private static Scene scene;
     private static boolean computer = false;
+    boolean[] clicked = new boolean[9];
     private static Button PVC = new Button();
     private static Button PVP = new Button();
     private static TextArea textBox = new TextArea();
     private final String X = "X";
     private final String O = "O";
-    private final String playerOneButtonAttribute ="-fx-background-color: #0000FF; -fx-border-color: white;-fx-font: 40 arial; -fx-text-fill: #000000; -fx-font-weight: bold;";
-    private final String playerTwoButtonAttribute = "-fx-background-color: #FFA500; -fx-border-color: white;-fx-font: 40 arial; -fx-text-fill: #000000; -fx-font-weight: bold;";
+    private final String playerOneButtonAttribute = "-fx-background-color: #0000FF; -fx-border-color: white;-fx-font: 40 arial; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-background-radius: 100;";
+    private final String playerTwoButtonAttribute = "-fx-background-color: #FFA500; -fx-border-color: white;-fx-font: 40 arial; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-background-radius: 100;";
+    private static final String activeButton = "-fx-background-color: #FFA500; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-background-radius: 100;";
+    private static final String nonActiveButton = "-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold; -fx-background-radius: 100;";
 
     public static void setMode(int x) {
         if(x==0) {
             computer = false;
-            PVC.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
-            PVP.setStyle("-fx-background-color: #FFA500; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
+            PVC.setStyle(nonActiveButton);
+            PVP.setStyle(activeButton);
         }
         if(x==1) {
             computer = true;
-            PVP.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
-            PVC.setStyle("-fx-background-color: #FFA500; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
+            PVP.setStyle(nonActiveButton);
+            PVC.setStyle(activeButton);
         }
     }
 
@@ -70,7 +69,7 @@ public class PlayerVsPlayer extends StartScreen {
         Button restart = new Button();
         restart.setPrefSize(200, 100);
         restart.setText("Restart");
-        restart.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
+        restart.setStyle(nonActiveButton);
 
         Label space2 = new Label(" ");
         Label space3 = new Label(" ");
@@ -91,7 +90,20 @@ public class PlayerVsPlayer extends StartScreen {
             buttons[i] = new Button();
             buttons[i].setId(i+"");
             buttons[i].setPrefSize(200, 200);
-            buttons[i].setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;");
+            buttons[i].setStyle("-fx-background-color: #00BFFF; -fx-border-color: white; -fx-background-radius: 100;");
+            buttons[i].setStyle("-fx-background-color: linear-gradient(to bottom, #ADD8E6, #87CEFA); -fx-border-color: white; -fx-background-radius: 100;");
+            buttons[i].setOnMouseEntered(event -> {
+                        int id = Integer.parseInt(((Button) event.getSource()).getId());
+                        if (!clicked[id]) {
+                            buttons[id].setStyle("-fx-background-color: #87CEFA; -fx-border-color: white; -fx-background-radius: 100;");
+                        }
+                    });
+            buttons[i].setOnMouseExited(event -> {
+                int id = Integer.parseInt(((Button) event.getSource()).getId());
+                if (!clicked[id]) {
+                    buttons[id].setStyle("-fx-background-color: linear-gradient(to bottom, #ADD8E6, #87CEFA); -fx-border-color: white; -fx-background-radius: 100;");
+                }
+            });
             buttons[i].setOnAction(event -> {
                 int buttonId = Integer.parseInt(((Button) event.getSource()).getId());
                 handleButtonClick(buttons, buttonId);
@@ -106,15 +118,15 @@ public class PlayerVsPlayer extends StartScreen {
         PVP.setOnAction(event ->{
             resetBoard(buttons);
             computer=false;
-            PVP.setStyle("-fx-background-color: #FFA500; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
-            PVC.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
+            PVP.setStyle(activeButton);
+            PVC.setStyle(nonActiveButton);
             textBox.setText(null);
         });
         PVC.setOnAction(event ->{
             resetBoard(buttons);
             computer=true;
-            PVC.setStyle("-fx-background-color: #FFA500; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
-            PVP.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;-fx-background-radius: 50, 50, 50, 50;-fx-font: 15 arial; -fx-text-fill: #000000; -fx-font-weight: bold;");
+            PVC.setStyle(activeButton);
+            PVP.setStyle(nonActiveButton);
             textBox.setText(null);
         });
         restart.setOnAction(event ->{
@@ -144,6 +156,7 @@ public class PlayerVsPlayer extends StartScreen {
             Button b = button[buttonNumPlayer];
             b.setText(playerOneTurn ? X : O);
             b.setStyle(playerOneTurn ? playerOneButtonAttribute : playerTwoButtonAttribute);
+            clicked[buttonId] = true;
             turn++;
             if(turn > 4)
                 checkWin(board);
@@ -181,7 +194,7 @@ public class PlayerVsPlayer extends StartScreen {
     }
 
     private void buttonReset(Button button){
-        button.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white;");
+        button.setStyle("-fx-background-color: #00BFFF; -fx-border-color: white; -fx-background-radius: 100;");
         button.setText("");
     }
 
