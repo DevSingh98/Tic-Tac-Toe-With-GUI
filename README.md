@@ -1,6 +1,6 @@
 # Tic-Tac-Toe with GUI
 
-This is a Java program that implements a Tic-Tac-Toe game with a graphical user interface (GUI) using JavaFX.
+This is a Java program that implements a Tic-Tac-Toe game with a graphical user interface (GUI) using JavaFX and java 21.
 
 ## Features
 - Interactive GUI for an engaging user experience.
