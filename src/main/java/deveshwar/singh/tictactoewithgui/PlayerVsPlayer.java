@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.Scene;
+import lombok.extern.java.Log;
 
+@Log
 public class PlayerVsPlayer extends StartScreen {
     private static int [][] board = new int [3][3];
     private static int turn =0;
@@ -231,17 +233,17 @@ public class PlayerVsPlayer extends StartScreen {
         final String draw = "Draw";
         if(check.getWin()==1) {
             turn=10;
-            System.out.println(p1);
+            log.info(p1);
             textBox.setText(p1);
         }
         if(check.getWin()==2) {
             turn=10;
-            System.out.println(p2);
+            log.info(p2);
             textBox.setText(p2);
         }
         if(turn==9) {
             turn=10;
-            System.out.println(draw);
+            log.info(draw);
             textBox.setText(draw);
         }
     }
