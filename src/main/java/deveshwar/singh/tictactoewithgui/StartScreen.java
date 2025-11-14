@@ -3,15 +3,12 @@ package deveshwar.singh.tictactoewithgui;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 public class StartScreen extends Application {
     static Scene scene;
@@ -19,50 +16,57 @@ public class StartScreen extends Application {
         scene=scene1;
     }
     public void start(Stage primaryStage) {
-        BorderPane root = new BorderPane();
-        Label Title = new Label(" Tic Tac Toe");
-        Title.setStyle("-fx-background-color: #000000;-fx-border-color: white;-fx-font: 40 arial; -fx-text-fill: #FF0000; -fx-font-weight: bold;");
-        Title.setPrefSize(250, 100);
-        root.setRight(null);
-        root.setLeft(null);
-        root.setTop(Title);
-        Button startPVP = new Button();
-        startPVP.setStyle("-fx-background-color: #2C3539;-fx-border-color: white;-fx-font: 16 arial; -fx-text-fill: #736AFF; -fx-font-weight: bold;");
-        Button startPVC = new Button();
-        startPVC.setStyle("-fx-background-color: #2C3539;-fx-border-color: white;-fx-font: 16 arial; -fx-text-fill: #736AFF; -fx-font-weight: bold;");
-        Label space = new Label(" ");
-
-        VBox v = new VBox();
-        v.getChildren().addAll(startPVP,space,startPVC);
-
-        startPVP.setText("Player\n   VS\nPlayer");
-        startPVP.setPrefSize(150, 125);
-        startPVP.setOnAction(value ->  {
-            PlayerVsPlayer a = new PlayerVsPlayer();
-            a.setMode(0);
-            scene=a.getScene();
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        VBox root = new VBox(30);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(50));
+        root.setStyle("-fx-background: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);");
+        
+        Label title = new Label("TIC TAC TOE");
+        title.setStyle("-fx-font-family: 'Arial Black'; -fx-font-size: 48px; -fx-text-fill: white; " +
+                      "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 3);");
+        
+        Button startPVP = createModernButton("👥 Player vs Player", "#4CAF50");
+        Button startPVC = createModernButton("🤖 Player vs Computer", "#2196F3");
+        
+        startPVP.setOnAction(e -> {
+            PlayerVsPlayer game = new PlayerVsPlayer();
+            game.setMode(0);
+            primaryStage.setScene(game.getScene());
         });
-
-        root.setCenter(v);
-
-
-        startPVC.setText("Player\n   VS\nComputer");
-        startPVC.setPrefSize(150, 125);
-        startPVC.setOnAction(value ->  {
-            PlayerVsPlayer a = new PlayerVsPlayer();
-            a.setMode(1);
-            scene=a.getScene();
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        
+        startPVC.setOnAction(e -> {
+            PlayerVsPlayer game = new PlayerVsPlayer();
+            game.setMode(1);
+            primaryStage.setScene(game.getScene());
         });
-        Scene Main = new Scene(root);
-
-
-        primaryStage.setScene(Main);
+        
+        root.getChildren().addAll(title, startPVP, startPVC);
+        Scene main = new Scene(root, 600, 500);
+        
+        primaryStage.setTitle("Tic Tac Toe");
+        primaryStage.setScene(main);
         primaryStage.show();
-
+    }
+    
+    private Button createModernButton(String text, String color) {
+        Button button = new Button(text);
+        button.setPrefSize(300, 80);
+        button.setStyle(String.format(
+            "-fx-background-color: %s; -fx-text-fill: white; -fx-font-size: 18px; " +
+            "-fx-font-weight: bold; -fx-background-radius: 25; -fx-border-radius: 25; " +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);", color));
+        
+        button.setOnMouseEntered(e -> button.setStyle(String.format(
+            "-fx-background-color: derive(%s, -10%%); -fx-text-fill: white; -fx-font-size: 18px; " +
+            "-fx-font-weight: bold; -fx-background-radius: 25; -fx-border-radius: 25; " +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 12, 0, 0, 4); -fx-scale-x: 1.05; -fx-scale-y: 1.05;", color)));
+        
+        button.setOnMouseExited(e -> button.setStyle(String.format(
+            "-fx-background-color: %s; -fx-text-fill: white; -fx-font-size: 18px; " +
+            "-fx-font-weight: bold; -fx-background-radius: 25; -fx-border-radius: 25; " +
+            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2); -fx-scale-x: 1.0; -fx-scale-y: 1.0;", color)));
+        
+        return button;
     }
 
 
