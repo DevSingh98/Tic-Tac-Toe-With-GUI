@@ -46,3 +46,7 @@ This is a Java program that implements a Tic-Tac-Toe game with a modern graphica
 - Toggle AI difficulty when in computer mode
 - Restart button to reset the current game
 - Main Menu button to return to start screen
+
+
+## Future Updates
+- Multiplayer mode
